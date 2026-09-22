@@ -1,0 +1,85 @@
+{
+  "business": {
+    "name": "Northbound Home Care",
+    "location": "Cape Town",
+    "whatsapp": "27718874432",
+    "instagram": "@northboundcpt",
+    "website": "northboundcpt.co.za",
+    "founder": "Bongi"
+  },
+  "hero": {
+    "eyebrow": "Northbound Home Care · Cape Town",
+    "heading": "Your home should give you time back.",
+    "description": "Reliable, professional home care for people who would rather spend their time living in their home than constantly looking after it. From a quick reset to a proper deep clean, your Northie has it covered.",
+    "serviceLine": "Cape Town · Home Cleaning · Linen Care · Property Care"
+  },
+  "services": [
+    {
+      "name": "Home Reset",
+      "price": "R400",
+      "description": "Your everyday rescue: one Northie for up to 3 hours of general tidying and cleaning — beds made, dishes washed, surfaces reset and floors swept/vacuumed and mopped.",
+      "bestFor": "Upkeep, busy weeks and a general refresh."
+    },
+    {
+      "name": "Deep Clean",
+      "price": "From R550",
+      "description": "The proper one. Everything in a Home Reset, plus detailed Airbnb-level cleaning, including underneath beds, behind accessible appliances and easily forgotten corners.",
+      "bestFor": "A thorough top-to-bottom refresh."
+    },
+    {
+      "name": "Event & Ceremony Cleanup",
+      "price": "From R1,500",
+      "description": "Umgidi, umcimbi, birthdays and family gatherings. We can tackle large cooking pots, dishes, kitchens, bathrooms, floors, rubbish, yards and general post-event cleanup.",
+      "bestFor": "Final pricing depends on the scale of the event and work required."
+    }
+  ],
+  "deepCleanPrices": [
+    { "label": "Studio / 1 bedroom", "price": "R550" },
+    { "label": "2 bedroom", "price": "R750" },
+    { "label": "3 bedroom", "price": "R950" },
+    { "label": "4+ bedroom", "price": "From R1,100" }
+  ],
+  "extras": {
+    "linenChange": "1–3 bed +R150 · 4+ bed +R200",
+    "linenLaundry": "1–2 bed +R300 · 3 bed +R350 · 4+ bed +R400",
+    "note": "For a linen change, please have fresh linen ironed and ready. Linen + laundry covers washing and drying (and folding where applicable and a tumble dryer is available)."
+  },
+  "propertyServices": [
+    {
+      "name": "Student Accommodation",
+      "description": "Recurring communal-area cleaning, room turnovers, move-in/move-out cleans and end-of-term deep cleaning. We'll build a plan around your property and cleaning frequency.",
+      "button": "Request a property assessment",
+      "whatsappPrompt": "I'd like to discuss student accommodation cleaning."
+    },
+    {
+      "name": "Property Partners",
+      "description": "Structured cleaning and linen support for landlords, short-term rentals and property operators. Property services are quoted according to portfolio, requirements and frequency.",
+      "button": "Talk to Northbound",
+      "whatsappPrompt": "I'd like to discuss property cleaning."
+    },
+    {
+      "name": "Recurring Home Care",
+      "description": "Love coming home to Northbound? Ask about weekly, fortnightly or another regular home-care schedule.",
+      "button": "Ask about recurring care",
+      "whatsappPrompt": "I'd like to ask about recurring home care."
+    }
+  ],
+  "about": {
+    "heading": "Hi, I'm Bongi.",
+    "paragraphs": [
+      "I started Northbound because I've always felt that housekeeping deserves to be treated as a professional service.",
+      "I wanted to build something that creates better, more sustainable opportunities for the people doing the work while giving clients something incredibly valuable in return: time.",
+      "Time to rest. Time for family. Time for friends. Time to work. Or simply time to sit on your couch and do absolutely nothing without staring at the floor thinking you should probably mop it.",
+      "Your home is important. So are the people who care for it."
+    ]
+  },
+  "faqs": [
+    { "question": "What's the difference between a Home Reset and Deep Clean?", "answer": "A Home Reset is one Northie for up to three hours of everyday cleaning and tidying. A Deep Clean is more detailed and covers areas not normally tackled during routine upkeep." },
+    { "question": "Do you bring cleaning products and equipment?", "answer": "Yes. We arrive with the general products and equipment needed for the clean, including a vacuum. Tell us beforehand about specialist surfaces or product requirements." },
+    { "question": "Do I need to be home?", "answer": "No. Access can be arranged beforehand if you're comfortable with your Northie cleaning while you're away." },
+    { "question": "Can I book regularly?", "answer": "Yes. Weekly, fortnightly and other recurring arrangements can be discussed with us." },
+    { "question": "Can I request the same Northie?", "answer": "You can request them and we'll do our best to maintain consistency, subject to availability." },
+    { "question": "What is your cancellation policy?", "answer": "Please cancel or reschedule at least one hour before your scheduled service. Eligible cancelled bookings are credited as a Northbound voucher for use toward a future booking. Full voucher/payment terms will be confirmed when you book." },
+    { "question": "Where do you operate?", "answer": "Northbound services homes and properties across Cape Town. Send us your suburb when booking and we'll confirm availability." }
+  ]
+}
