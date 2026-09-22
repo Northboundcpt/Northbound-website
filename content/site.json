@@ -9,7 +9,7 @@
   },
   "hero": {
     "eyebrow": "Northbound Home Care · Cape Town",
-    "heading": "Your home should give you time back.",
+    "heading": "Your home should give you time back!",
     "description": "Reliable, professional home care for people who would rather spend their time living in their home than constantly looking after it. From a quick reset to a proper deep clean, your Northie has it covered.",
     "serviceLine": "Cape Town · Home Cleaning · Linen Care · Property Care"
   },
@@ -52,8 +52,8 @@
     }
   ],
   "extras": {
-    "linenChange": "1–3 bed +R150 · 4+ bed +R200",
-    "linenLaundry": "1–2 bed +R300 · 3 bed +R350 · 4+ bed +R400",
+    "linenChange": "1 - 3 bed +R150 · 4+ bed +R200",
+    "linenLaundry": "1 - 2 bed +R300 · 3 bed +R350 · 4+ bed +R400",
     "note": "For a linen change, please have fresh linen ironed and ready. Linen + laundry covers washing and drying (and folding where applicable and a tumble dryer is available)."
   },
   "propertyServices": [
