@@ -17,7 +17,7 @@
     {
       "name": "Home Reset",
       "price": "R400",
-      "description": "Your everyday rescue: one Northie for up to 3 hours of general tidying and cleaning — beds made, dishes washed, surfaces reset and floors swept/vacuumed and mopped.",
+      "description": "Your everyday rescue: one Northie for up to 3 hours of general tidying and cleaning - beds made, dishes washed, surfaces reset and floors swept/vacuumed and mopped.",
       "bestFor": "Upkeep, busy weeks and a general refresh."
     },
     {
@@ -34,10 +34,22 @@
     }
   ],
   "deepCleanPrices": [
-    { "label": "Studio / 1 bedroom", "price": "R550" },
-    { "label": "2 bedroom", "price": "R750" },
-    { "label": "3 bedroom", "price": "R950" },
-    { "label": "4+ bedroom", "price": "From R1,100" }
+    {
+      "label": "Studio / 1 bedroom",
+      "price": "R550"
+    },
+    {
+      "label": "2 bedroom",
+      "price": "R750"
+    },
+    {
+      "label": "3 bedroom",
+      "price": "R950"
+    },
+    {
+      "label": "4+ bedroom",
+      "price": "From R1,100"
+    }
   ],
   "extras": {
     "linenChange": "1–3 bed +R150 · 4+ bed +R200",
@@ -65,7 +77,7 @@
     }
   ],
   "about": {
-    "heading": "Hi, I'm Bongi.",
+    "heading": "Hi, I'm Bongolethu.",
     "paragraphs": [
       "I started Northbound because I've always felt that housekeeping deserves to be treated as a professional service.",
       "I wanted to build something that creates better, more sustainable opportunities for the people doing the work while giving clients something incredibly valuable in return: time.",
@@ -74,12 +86,33 @@
     ]
   },
   "faqs": [
-    { "question": "What's the difference between a Home Reset and Deep Clean?", "answer": "A Home Reset is one Northie for up to three hours of everyday cleaning and tidying. A Deep Clean is more detailed and covers areas not normally tackled during routine upkeep." },
-    { "question": "Do you bring cleaning products and equipment?", "answer": "Yes. We arrive with the general products and equipment needed for the clean, including a vacuum. Tell us beforehand about specialist surfaces or product requirements." },
-    { "question": "Do I need to be home?", "answer": "No. Access can be arranged beforehand if you're comfortable with your Northie cleaning while you're away." },
-    { "question": "Can I book regularly?", "answer": "Yes. Weekly, fortnightly and other recurring arrangements can be discussed with us." },
-    { "question": "Can I request the same Northie?", "answer": "You can request them and we'll do our best to maintain consistency, subject to availability." },
-    { "question": "What is your cancellation policy?", "answer": "Please cancel or reschedule at least one hour before your scheduled service. Eligible cancelled bookings are credited as a Northbound voucher for use toward a future booking. Full voucher/payment terms will be confirmed when you book." },
-    { "question": "Where do you operate?", "answer": "Northbound services homes and properties across Cape Town. Send us your suburb when booking and we'll confirm availability." }
+    {
+      "question": "What's the difference between a Home Reset and Deep Clean?",
+      "answer": "A Home Reset is one Northie for up to three hours of everyday cleaning and tidying. A Deep Clean is more detailed and covers areas not normally tackled during routine upkeep."
+    },
+    {
+      "question": "Do you bring cleaning products and equipment?",
+      "answer": "Yes. We arrive with the general products and equipment needed for the clean, including a vacuum. Tell us beforehand about specialist surfaces or product requirements."
+    },
+    {
+      "question": "Do I need to be home?",
+      "answer": "No. Access can be arranged beforehand if you're comfortable with your Northie cleaning while you're away."
+    },
+    {
+      "question": "Can I book regularly?",
+      "answer": "Yes. Weekly, fortnightly and other recurring arrangements can be discussed with us."
+    },
+    {
+      "question": "Can I request the same Northie?",
+      "answer": "You can request them and we'll do our best to maintain consistency, subject to availability."
+    },
+    {
+      "question": "What is your cancellation policy?",
+      "answer": "Please cancel or reschedule at least one hour before your scheduled service. Eligible cancelled bookings are credited as a Northbound voucher for use toward a future booking. Full voucher/payment terms will be confirmed when you book."
+    },
+    {
+      "question": "Where do you operate?",
+      "answer": "Northbound services homes and properties across Cape Town. Send us your suburb when booking and we'll confirm availability."
+    }
   ]
 }
