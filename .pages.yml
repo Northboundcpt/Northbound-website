@@ -1,0 +1,80 @@
+media:
+  input: media
+  output: /media
+
+content:
+  - name: website
+    label: Edit Northbound Website
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: business
+        label: Business details
+        type: object
+        fields:
+          - { name: name, label: Business name, type: string }
+          - { name: location, label: Location, type: string }
+          - { name: whatsapp, label: WhatsApp number, type: string, description: "Use country code without + or spaces, e.g. 27718874432" }
+          - { name: instagram, label: Instagram, type: string }
+          - { name: website, label: Website address, type: string }
+          - { name: founder, label: Founder name, type: string }
+      - name: hero
+        label: Homepage introduction
+        type: object
+        fields:
+          - { name: eyebrow, label: Small heading, type: string }
+          - { name: heading, label: Main heading, type: string }
+          - { name: description, label: Introduction, type: text }
+          - { name: serviceLine, label: Service summary line, type: string }
+      - name: services
+        label: Main services
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Service name, type: string }
+          - { name: price, label: Price, type: string }
+          - { name: description, label: Description, type: text }
+          - { name: bestFor, label: Best for / final note, type: text }
+      - name: deepCleanPrices
+        label: Deep-clean prices
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Property size, type: string }
+          - { name: price, label: Price, type: string }
+      - name: extras
+        label: Linen extras
+        type: object
+        fields:
+          - { name: linenChange, label: Linen-change prices, type: string }
+          - { name: linenLaundry, label: Linen and laundry prices, type: string }
+          - { name: note, label: Linen note, type: text }
+      - name: propertyServices
+        label: Property services
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Service name, type: string }
+          - { name: description, label: Description, type: text }
+          - { name: button, label: Button wording, type: string }
+          - { name: whatsappPrompt, label: WhatsApp message, type: text }
+      - name: about
+        label: About Northbound
+        type: object
+        fields:
+          - { name: heading, label: About heading, type: string }
+          - name: paragraphs
+            label: About paragraphs
+            type: text
+            list: true
+      - name: faqs
+        label: Frequently asked questions
+        type: object
+        list: true
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: answer, label: Answer, type: text }
+
+settings:
+  hide: false
