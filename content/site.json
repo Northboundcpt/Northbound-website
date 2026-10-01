@@ -31,6 +31,12 @@
       "price": "From R1,500",
       "description": "Umgidi, umcimbi, birthdays and family gatherings. We can tackle large cooking pots, dishes, kitchens, bathrooms, floors, rubbish, yards and general post-event cleanup.",
       "bestFor": "Final pricing depends on the scale of the event and work required."
+    },
+    {
+      "name": "Carpet, Mattress & Couch Cleaning",
+      "price": "Quote on request",
+      "description": "Give your carpets, mattresses and couches a refresh. Send us photos, the item sizes or carpet area, and your suburb for a personalised quote.",
+      "bestFor": "Homes, rental properties and student accommodation"
     }
   ],
   "deepCleanPrices": [
