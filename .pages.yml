@@ -61,6 +61,20 @@ content:
             fields:
               - { name: largeHomeAddon, label: Window add-on price for 3+ bedrooms (rand), type: number }
               - { name: scope, label: Window washing scope, type: text }
+      - name: bookingExtras
+        label: Booking extras
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Extra name, type: string }
+          - { name: description, label: Description, type: text }
+          - name: pricing
+            label: Pricing method
+            type: select
+            options: [fixed, bedrooms, quote]
+          - { name: price, label: Fixed price (rand), type: number }
+          - { name: smallHomePrice, label: Price for 1–3 bedrooms (rand), type: number }
+          - { name: largeHomePrice, label: Price for 4+ bedrooms (rand), type: number }
       - name: propertyServices
         label: Property services
         type: object
