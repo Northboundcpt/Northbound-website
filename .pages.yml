@@ -50,6 +50,12 @@ content:
           - { name: linenChange, label: Linen-change prices, type: string }
           - { name: linenLaundry, label: Linen and laundry prices, type: string }
           - { name: note, label: Linen note, type: text }
+      - name: windowWashing
+        label: Window washing with Deep Cleans
+        type: object
+        fields:
+          - { name: largeHomeAddon, label: Window add-on price for 3+ bedrooms (rand), type: number }
+          - { name: scope, label: Window washing scope, type: text }
       - name: propertyServices
         label: Property services
         type: object
