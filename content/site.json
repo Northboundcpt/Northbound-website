@@ -65,12 +65,17 @@
   ],
   "extras": {
     "linenChange": "1 - 3 bed +R150 · 4+ bed +R200",
-    "linenLaundry": "1 - 2 bed +R300 · 3 bed +R350 · 4+ bed +R400",
-    "note": "For a linen change, please have fresh linen ironed and ready. Linen + laundry covers washing and drying (and folding where applicable and a tumble dryer is available).",
+    "linenLaundry": "Drop-off to Pressed on Point — quote on request.",
+    "note": "Please provide fresh, ready-to-use bedding. Linen change covers removing and replacing bedding using what you supply; washing, ironing and other preparation are excluded. Linen ironing can be added for R150. Laundry drop-off is quoted separately for approval.",
     "windowWashing": {
       "largeHomeAddon": 200,
       "scope": "Standard, safely reachable windows. Large glass areas and unusually dirty or hard-to-reach windows are quoted separately."
-    }
+    },
+    "heading": "Linen change, linen ironing and laundry drop-off",
+    "linenChangeHeading": "Linen change",
+    "linenIroningHeading": "Linen ironing",
+    "linenIroning": "+R150",
+    "linenLaundryHeading": "Laundry drop-off"
   },
   "propertyServices": [
     {
