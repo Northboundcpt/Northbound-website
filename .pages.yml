@@ -76,6 +76,20 @@ content:
           - { name: question, label: Question, type: string }
           - { name: answer, label: Answer, type: text }
 
+  - name: availability
+    label: Booking availability
+    type: file
+    path: content/availability.json
+    format: json
+    fields:
+      - { name: enabled, label: Accept booking requests, type: boolean }
+      - { name: whatsapp, label: Booking WhatsApp number, type: string, description: "Country code and number only. Check this is your current business number." }
+      - name: availableDates
+        label: Available dates
+        type: string
+        list: true
+        description: "Add dates as YYYY-MM-DD, e.g. 2026-11-02. Only listed dates open for requests. Remove dates when fully booked. Sundays remain closed. Never enter customer information here."
+
 settings:
   hide: false
   commit:
