@@ -135,5 +135,31 @@
       "question": "Where do you operate?",
       "answer": "Northbound services homes and properties across Cape Town. Send us your suburb when booking and we'll confirm availability."
     }
+  ],
+  "bookingExtras": [
+    {
+      "name": "Linen change",
+      "description": "We remove and replace bedding using fresh, ready-to-use linen supplied by you. Washing, ironing and other preparation are excluded.",
+      "pricing": "bedrooms",
+      "price": 0,
+      "smallHomePrice": 150,
+      "largeHomePrice": 200
+    },
+    {
+      "name": "Linen ironing",
+      "description": "We iron the linen you provide before making the beds.",
+      "pricing": "fixed",
+      "price": 150,
+      "smallHomePrice": 0,
+      "largeHomePrice": 0
+    },
+    {
+      "name": "Laundry drop-off",
+      "description": "We take your laundry to Pressed on Point. We’ll send a separate quote for approval.",
+      "pricing": "quote",
+      "price": 0,
+      "smallHomePrice": 0,
+      "largeHomePrice": 0
+    }
   ]
 }
