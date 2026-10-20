@@ -44,18 +44,23 @@ content:
           - { name: label, label: Property size, type: string }
           - { name: price, label: Price, type: string }
       - name: extras
-        label: Linen extras
+        label: Linen change, linen ironing and laundry drop-off
         type: object
         fields:
+          - { name: heading, label: Section heading, type: string }
+          - { name: linenChangeHeading, label: Linen-change heading, type: string }
           - { name: linenChange, label: Linen-change prices, type: string }
-          - { name: linenLaundry, label: Linen and laundry prices, type: string }
-          - { name: note, label: Linen note, type: text }
-      - name: windowWashing
-        label: Window washing with Deep Cleans
-        type: object
-        fields:
-          - { name: largeHomeAddon, label: Window add-on price for 3+ bedrooms (rand), type: number }
-          - { name: scope, label: Window washing scope, type: text }
+          - { name: linenIroningHeading, label: Linen-ironing heading, type: string }
+          - { name: linenIroning, label: Linen-ironing price, type: string }
+          - { name: linenLaundryHeading, label: Laundry-drop-off heading, type: string }
+          - { name: linenLaundry, label: Laundry-drop-off details, type: text }
+          - { name: note, label: Linen and laundry note, type: text }
+          - name: windowWashing
+            label: Window washing with Deep Cleans
+            type: object
+            fields:
+              - { name: largeHomeAddon, label: Window add-on price for 3+ bedrooms (rand), type: number }
+              - { name: scope, label: Window washing scope, type: text }
       - name: propertyServices
         label: Property services
         type: object
