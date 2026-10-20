@@ -23,7 +23,7 @@
     {
       "name": "Deep Clean",
       "price": "From R550",
-      "description": "The proper one. Everything in a Home Reset, plus detailed Airbnb-level cleaning, including underneath beds, behind accessible appliances and easily forgotten corners.",
+      "description": "The proper one. Everything in a Home Reset, plus detailed Airbnb-level cleaning, including underneath beds, behind accessible appliances and easily forgotten corners. Standard window washing is included for studio–2-bedroom homes; for 3+ bedrooms, add it for R200.",
       "bestFor": "A thorough top-to-bottom refresh."
     },
     {
@@ -37,6 +37,12 @@
       "price": "Quote on request",
       "description": "Give your carpets, mattresses and couches a refresh. Send us photos, the item sizes or carpet area, and your suburb for a personalised quote.",
       "bestFor": "Homes, rental properties and student accommodation"
+    },
+    {
+      "name": "Window Washing",
+      "price": "Quote on request",
+      "description": "A clearer view, without a full house clean. Book standard window washing on its own. Send photos, the approximate number of windows and your suburb for a personalised quote.",
+      "bestFor": "Standard, safely reachable windows. Large glass areas and unusually dirty or hard-to-reach windows are quoted separately."
     }
   ],
   "deepCleanPrices": [
@@ -60,7 +66,11 @@
   "extras": {
     "linenChange": "1 - 3 bed +R150 · 4+ bed +R200",
     "linenLaundry": "1 - 2 bed +R300 · 3 bed +R350 · 4+ bed +R400",
-    "note": "For a linen change, please have fresh linen ironed and ready. Linen + laundry covers washing and drying (and folding where applicable and a tumble dryer is available)."
+    "note": "For a linen change, please have fresh linen ironed and ready. Linen + laundry covers washing and drying (and folding where applicable and a tumble dryer is available).",
+    "windowWashing": {
+      "largeHomeAddon": 200,
+      "scope": "Standard, safely reachable windows. Large glass areas and unusually dirty or hard-to-reach windows are quoted separately."
+    }
   },
   "propertyServices": [
     {
