@@ -3,7 +3,7 @@
 const section=document.createElement("section");
 section.className="section";
 section.id="booking";
-section.innerHTML=`<div class="wrap"><div class="eyebrow">Your home. Your time.</div><h2>Book your Northie.</h2><p>Choose your care and a date. Send us your request on WhatsApp and we’ll confirm the team, price and timing.</p><p>Monday–Saturday · 08:00–20:00. All work must finish by 20:00. Up to four cleans per day, subject to team availability.</p><div class="booking-layout"><div class="card"><h3>Choose a date</h3><p class="small">Highlighted dates are open for requests. A date is reserved only once we confirm.</p><div class="calendar-nav"><button type="button" id="previous-month" aria-label="Previous month">←</button><strong id="calendar-month"></strong><button type="button" id="next-month" aria-label="Next month">→</button></div><div id="booking-calendar" class="booking-calendar" role="group" aria-label="Available dates"></div><p id="availability-status" role="status">Loading availability…</p></div><form class="card" id="booking-form"><h3>A little about your clean</h3><label for="booking-service">Service</label><select id="booking-service" required><option value="">Choose a service</option></select><label for="booking-date">Selected date</label><input id="booking-date" type="text" readonly required placeholder="Choose a highlighted date"><label for="booking-time">Preferred start time</label><select id="booking-time" required><option value="">Choose a time</option><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select><p class="small">Start times depend on the service duration and travel. Larger jobs need an earlier start.</p><label for="booking-name">Your name</label><input id="booking-name" autocomplete="name" maxlength="100" required><label for="booking-area">Suburb</label><input id="booking-area" maxlength="100" required><label for="booking-size">Property or item size</label><input id="booking-size" maxlength="150" placeholder="e.g. 2 bedrooms or a 2-seater couch" required><div id="booking-bedroom-field" hidden><label for="booking-bedrooms">Property size for your estimate</label><select id="booking-bedrooms"><option value="">Choose your property size</option></select></div><div class="booking-estimate" role="status" aria-live="polite"><strong id="booking-estimate">Choose a service to see an estimate.</strong><p class="small">This is a guide, not an official quote. Extras are excluded. We’ll review your requirements and send an official quote before you confirm.</p></div><label for="booking-notes">Anything else? (optional)</label><textarea id="booking-notes" maxlength="1000" rows="3"></textarea><p class="small">Please leave out access codes and sensitive details. This form isn’t saved on our website. Continuing opens WhatsApp; you must send the message there.</p><button class="btn primary" id="booking-submit" type="submit" disabled>Request on WhatsApp</button><p id="booking-feedback" role="status"></p><noscript>Please use the WhatsApp link below to request a clean.</noscript></form></div></div>`;
+section.innerHTML=`<div class="wrap"><div class="eyebrow">Your home. Your time.</div><h2>Book your Northie.</h2><p>Choose your care and a date. Send us your request on WhatsApp and we’ll confirm the team, price and timing.</p><p>Monday–Saturday · 08:00–20:00. All work must finish by 20:00. Up to four cleans per day, subject to team availability.</p><div class="booking-layout"><div class="card"><h3>Choose a date</h3><p class="small">Highlighted dates are open for requests. A date is reserved only once we confirm.</p><div class="calendar-nav"><button type="button" id="previous-month" aria-label="Previous month">←</button><strong id="calendar-month"></strong><button type="button" id="next-month" aria-label="Next month">→</button></div><div id="booking-calendar" class="booking-calendar" role="group" aria-label="Available dates"></div><p id="availability-status" role="status">Loading availability…</p></div><form class="card" id="booking-form"><h3>A little about your clean</h3><p class="small">All fields are required except “Anything else?”. Choose a date to enable your request.</p><label for="booking-service">Service</label><select id="booking-service" required><option value="">Choose a service</option></select><label for="booking-date">Selected date</label><input id="booking-date" type="text" readonly required placeholder="Choose a highlighted date"><label for="booking-time">Preferred start time</label><select id="booking-time" required><option value="">Choose a time</option><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select><p class="small">Start times depend on the service duration and travel. Larger jobs need an earlier start.</p><label for="booking-name">Your name</label><input id="booking-name" autocomplete="name" maxlength="100" required><label for="booking-area">Suburb</label><input id="booking-area" maxlength="100" required><label for="booking-size">Property or item size</label><input id="booking-size" maxlength="150" placeholder="e.g. 2 bedrooms or a 2-seater couch" required><div id="booking-bedroom-field" hidden><label for="booking-bedrooms">Property size for your estimate</label><select id="booking-bedrooms"><option value="">Choose your property size</option></select></div><div class="booking-estimate" role="status" aria-live="polite"><strong id="booking-estimate">Choose a service to see an estimate.</strong><p class="small">This is a guide, not an official quote. Extras are excluded. We’ll review your requirements and send an official quote before you confirm.</p></div><label for="booking-notes">Anything else? (optional)</label><textarea id="booking-notes" maxlength="1000" rows="3"></textarea><p class="small">Please leave out access codes and sensitive details. This form isn’t saved on our website. Continuing opens WhatsApp; you must send the message there.</p><button class="btn primary" id="booking-submit" type="submit" disabled>Request on WhatsApp</button><p id="booking-feedback" role="status"></p><noscript>Please use the WhatsApp link below to request a clean.</noscript></form></div></div>`;
 const footer=document.querySelector("footer");
 if(!footer)return;
 footer.before(section);
@@ -15,7 +15,22 @@ const el=id=>document.getElementById(id);
 const today=new Intl.DateTimeFormat("en-CA",{timeZone:"Africa/Johannesburg",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 const parts=today.split("-").map(Number);
 let year=parts[0],month=parts[1]-1,selected="",dates=new Set(),settings=null;
-let priceData=null;
+let priceData=null,submitting=false;
+function updateSubmit(){
+ const required=["booking-service","booking-time","booking-name","booking-area","booking-size"];
+ if(el("booking-service").value==="Deep Clean")required.push("booking-bedrooms");
+ let complete=true;
+ required.forEach(id=>{
+ const input=el(id),filled=String(input.value||"").trim().length>0;
+ input.setCustomValidity(filled?"":"Please fill in this field.");
+ if(!filled)complete=false;
+ });
+ const ready=!!settings?.enabled&&!!selected&&allowed(selected)&&complete&&!submitting;
+ el("booking-submit").disabled=!ready;
+ return ready;
+}
+el("booking-form").oninput=updateSubmit;
+el("booking-form").onchange=updateSubmit;
 function priceEstimate(){
  const service=priceData?.services?.find(s=>s.name===el("booking-service").value);
  if(!service)return "Choose a service to see an estimate.";
@@ -33,7 +48,9 @@ function updateEstimate(){
  const deep=el("booking-service").value==="Deep Clean";
  el("booking-bedroom-field").hidden=!deep;
  el("booking-bedrooms").required=deep;
+ if(!deep)el("booking-bedrooms").setCustomValidity("");
  el("booking-estimate").textContent=priceEstimate();
+ updateSubmit();
 }
 el("booking-service").onchange=updateEstimate;
 el("booking-bedrooms").onchange=updateEstimate;
@@ -51,6 +68,7 @@ function render(){
  b.onclick=()=>{selected=date;el("booking-date").value=date;el("booking-feedback").textContent="Selected "+date;render();};grid.append(b);
  }
  el("previous-month").disabled=year===parts[0]&&month===parts[1]-1;
+ updateSubmit();
 }
 el("previous-month").onclick=()=>{if(--month<0){month=11;year--;}render();};
 el("next-month").onclick=()=>{if(++month>11){month=0;year++;}render();};
@@ -63,7 +81,7 @@ Promise.all([json("content/availability.json"),json("content/site.json")]).then(
  updateEstimate();
  const number=String(settings.whatsapp||"").replace(/\D/g,"");
  if(!/^\d{9,15}$/.test(number))throw Error("Booking contact needs updating");
- el("booking-submit").disabled=!settings.enabled;
+ updateSubmit();
  const open=[...dates].filter(allowed).sort();
  el("availability-status").textContent=!settings.enabled?"Online requests are paused. Contact us on WhatsApp below.":open.length?"Choose a highlighted date. Availability is confirmed after we review your request.":"No dates are currently listed. Please contact us on WhatsApp below to check availability.";
  if(open.length){const p=open[0].split("-").map(Number);year=p[0];month=p[1]-1;}render();
@@ -71,7 +89,11 @@ Promise.all([json("content/availability.json"),json("content/site.json")]).then(
 el("booking-form").onsubmit=async event=>{
  event.preventDefault();
  if(!selected){el("booking-feedback").textContent="Please choose an available date first.";return;}
- const button=el("booking-submit");button.disabled=true;
+ if(!updateSubmit()||!el("booking-form").reportValidity()){
+ el("booking-feedback").textContent="Please complete all required fields before sending your request.";
+ return;
+ }
+ const button=el("booking-submit");submitting=true;button.disabled=true;
  try{
  const latest=await json("content/availability.json");dates=new Set(latest.availableDates||[]);
  if(!latest.enabled||!allowed(selected))throw Error("That date is no longer open. Please choose another date.");
@@ -80,7 +102,7 @@ el("booking-form").onsubmit=async event=>{
  window.location.assign("https://wa.me/"+number+"?text="+encodeURIComponent(text));
  el("booking-feedback").textContent="Send the message in WhatsApp to complete your request. Your clean is not confirmed yet.";
  }catch(error){el("booking-feedback").textContent=error.message;render();}
- finally{button.disabled=!settings||!settings.enabled;}
+ finally{submitting=false;updateSubmit();}
 };
 render();
 })();
