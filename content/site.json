@@ -33,10 +33,22 @@
       "bestFor": "Final pricing depends on the scale of the event and work required."
     },
     {
-      "name": "Carpet, Mattress & Couch Cleaning",
+      "name": "Carpet Washing",
+      "price": "From R250",
+      "description": "Price quoted by size. Enter your carpet width and length when booking for an estimate.",
+      "bestFor": "Carpets and rugs that need a fresh start."
+    },
+    {
+      "name": "Mattress Washing",
+      "price": "From R250",
+      "description": "Choose your mattress size when booking to see an estimate.",
+      "bestFor": "A refresh for your sleeping space."
+    },
+    {
+      "name": "Couch Cleaning",
       "price": "Quote on request",
-      "description": "Give your carpets, mattresses and couches a refresh. Send us photos, the item sizes or carpet area, and your suburb for a personalised quote.",
-      "bestFor": "Homes, rental properties and student accommodation"
+      "description": "Send photos, couch size and your suburb for a personalised quote.",
+      "bestFor": "Couches and upholstered seating."
     },
     {
       "name": "Window Washing",
@@ -160,6 +172,81 @@
       "price": 0,
       "smallHomePrice": 0,
       "largeHomePrice": 0
+    }
+  ],
+  "carpetPrices": [
+    {
+      "width": 0.6,
+      "length": 0.9,
+      "price": 250
+    },
+    {
+      "width": 1,
+      "length": 1,
+      "price": 300
+    },
+    {
+      "width": 1,
+      "length": 1.5,
+      "price": 350
+    },
+    {
+      "width": 1.5,
+      "length": 1.5,
+      "price": 400
+    },
+    {
+      "width": 1.5,
+      "length": 2.5,
+      "price": 550
+    },
+    {
+      "width": 2,
+      "length": 2,
+      "price": 650
+    },
+    {
+      "width": 2,
+      "length": 3,
+      "price": 750
+    },
+    {
+      "width": 2.3,
+      "length": 3,
+      "price": 800
+    },
+    {
+      "width": 3,
+      "length": 3,
+      "price": 1000
+    },
+    {
+      "width": 3,
+      "length": 4,
+      "price": 1200
+    },
+    {
+      "width": 3.5,
+      "length": 3.5,
+      "price": 1350
+    }
+  ],
+  "mattressPrices": [
+    {
+      "label": "Single",
+      "price": 250
+    },
+    {
+      "label": "Double / Three-quarter",
+      "price": 350
+    },
+    {
+      "label": "Queen",
+      "price": 400
+    },
+    {
+      "label": "King",
+      "price": 500
     }
   ]
 }
