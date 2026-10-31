@@ -3,7 +3,7 @@
 const section=document.createElement("section");
 section.className="section";
 section.id="booking";
-section.innerHTML=`<div class="wrap"><div class="eyebrow">Your home. Your time.</div><h2>Book your Northie.</h2><p>Choose your care and a date. Send us your request on WhatsApp and we’ll confirm the team, price and timing.</p><p>Monday–Saturday · 08:00–20:00. All work must finish by 20:00. Up to four cleans per day, subject to team availability.</p><div class="booking-layout"><div class="card"><h3>Choose a date</h3><p class="small">Highlighted dates are open for requests. A date is reserved only once we confirm.</p><div class="calendar-nav"><button type="button" id="previous-month" aria-label="Previous month">←</button><strong id="calendar-month"></strong><button type="button" id="next-month" aria-label="Next month">→</button></div><div id="booking-calendar" class="booking-calendar" role="group" aria-label="Available dates"></div><p id="availability-status" role="status">Loading availability…</p></div><form class="card" id="booking-form"><h3>A little about your clean</h3><p class="small">All fields are required except optional extras and “Anything else?”. Choose a date to enable your request.</p><label for="booking-service">Service</label><select id="booking-service" required><option value="">Choose a service</option></select><label for="booking-date">Selected date</label><input id="booking-date" type="text" readonly required placeholder="Choose a highlighted date"><label for="booking-time">Preferred start time</label><select id="booking-time" required><option value="">Choose a time</option><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select><p class="small">Start times depend on the service duration and travel. Larger jobs need an earlier start.</p><label for="booking-name">Your name</label><input id="booking-name" autocomplete="name" maxlength="100" required><label for="booking-area">Suburb</label><input id="booking-area" maxlength="100" required><label for="booking-size">Property or item size</label><input id="booking-size" maxlength="150" placeholder="e.g. 2 bedrooms or a 2-seater couch" required><div id="booking-carpet-fields" hidden><label for="carpet-width">Carpet width (metres)</label><input id="carpet-width" type="number" min="0.01" step="0.01" placeholder="e.g. 2"><label for="carpet-length">Carpet length (metres)</label><input id="carpet-length" type="number" min="0.01" step="0.01" placeholder="e.g. 3"><p class="small">One carpet per request. Estimate uses width × length, rounded up to the next listed area bracket. Above 12.25 m² is quoted separately. Final price depends on material and condition.</p></div><div id="booking-mattress-fields" hidden><label for="mattress-size">Mattress size</label><select id="mattress-size"><option value="">Choose a mattress size</option></select><p class="small">Price per mattress. Mention additional items in “Anything else?”.</p></div><div id="booking-bedroom-field" hidden><label for="booking-bedrooms">Property size for your estimate</label><select id="booking-bedrooms"><option value="">Choose your property size</option></select></div><div id="booking-window-field" hidden><p id="booking-window-info"></p><label id="booking-window-option"><input id="booking-windows" type="checkbox"> <span id="booking-window-label"></span></label><p class="small" id="booking-window-scope"></p></div><fieldset id="booking-extras"><legend>Optional extras</legend><div id="booking-extras-list"></div></fieldset><div class="booking-estimate" role="status" aria-live="polite"><strong id="booking-estimate">Choose a service to see an estimate.</strong><p class="small">This is a guide, not an official quote. Selected priced extras are included in the estimate. Laundry and any other quote-only extras are quoted separately. We’ll review your requirements and send an official quote before you confirm.</p></div><label for="booking-notes">Anything else? (optional)</label><textarea id="booking-notes" maxlength="1000" rows="3"></textarea><p class="small">Please leave out access codes and sensitive details. This form isn’t saved on our website. Continuing opens WhatsApp; you must send the message there.</p><button class="btn primary" id="booking-submit" type="submit" disabled>Request on WhatsApp</button><p id="booking-feedback" role="status"></p><noscript>Please use the WhatsApp link below to request a clean.</noscript></form></div></div>`;
+section.innerHTML=`<div class="wrap"><div class="eyebrow">Your home. Your time.</div><h2>Book your Northie.</h2><p>Choose your care and a date. Send us your request on WhatsApp and we’ll confirm the team, price and timing.</p><p>Monday–Saturday · 08:00–20:00. All work must finish by 20:00. Up to four cleans per day, subject to team availability.</p><div class="booking-layout"><div class="card"><h3>Choose a date</h3><p class="small">Highlighted dates are open for requests. A date is reserved only once we confirm.</p><div class="calendar-nav"><button type="button" id="previous-month" aria-label="Previous month">←</button><strong id="calendar-month"></strong><button type="button" id="next-month" aria-label="Next month">→</button></div><div id="booking-calendar" class="booking-calendar" role="group" aria-label="Available dates"></div><p id="availability-status" role="status">Loading availability…</p></div><form class="card" id="booking-form"><h3>A little about your clean</h3><p class="small">All fields are required except optional extras and “Anything else?”. Choose a date to enable your request.</p><label for="booking-service">Service</label><select id="booking-service" required><option value="">Choose a service</option></select><label for="booking-date">Selected date</label><input id="booking-date" type="text" readonly required placeholder="Choose a highlighted date"><label for="booking-time">Preferred start time</label><select id="booking-time" required><option value="">Choose a time</option><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select><p class="small">Start times depend on the service duration and travel. Larger jobs need an earlier start.</p><label for="booking-name">Your name</label><input id="booking-name" autocomplete="name" maxlength="100" required><label for="booking-area">Suburb</label><input id="booking-area" maxlength="100" required><label for="booking-size">Property or item size</label><input id="booking-size" maxlength="150" placeholder="e.g. 2 bedrooms or a 2-seater couch" required><fieldset id="fabric-addons" hidden><legend>Optional carpet & mattress washing</legend><label><input type="checkbox" id="add-carpet"> Add carpet washing — from R250</label><label><input type="checkbox" id="add-mattress"> Add mattress washing — from R250</label></fieldset><div id="booking-carpet-fields" hidden><label for="carpet-width">Carpet width (metres)</label><input id="carpet-width" type="number" min="0.01" step="0.01" placeholder="e.g. 2"><label for="carpet-length">Carpet length (metres)</label><input id="carpet-length" type="number" min="0.01" step="0.01" placeholder="e.g. 3"><p class="small">One carpet per request. Estimate uses width × length, rounded up to the next listed area bracket. Above 12.25 m² is quoted separately. Final price depends on material and condition.</p></div><div id="booking-mattress-fields" hidden><label for="mattress-size">Mattress size</label><select id="mattress-size"><option value="">Choose a mattress size</option></select><p class="small">Price per mattress. Mention additional items in “Anything else?”.</p></div><div id="booking-bedroom-field" hidden><label for="booking-bedrooms">Property size for your estimate</label><select id="booking-bedrooms"><option value="">Choose your property size</option></select></div><div id="booking-window-field" hidden><p id="booking-window-info"></p><label id="booking-window-option"><input id="booking-windows" type="checkbox"> <span id="booking-window-label"></span></label><p class="small" id="booking-window-scope"></p></div><fieldset id="booking-extras"><legend>Optional extras</legend><div id="booking-extras-list"></div></fieldset><div class="booking-estimate" role="status" aria-live="polite"><strong id="booking-estimate">Choose a service to see an estimate.</strong><p class="small">This is a guide, not an official quote. Selected priced extras are included in the estimate. Laundry and any other quote-only extras are quoted separately. We’ll review your requirements and send an official quote before you confirm.</p></div><label for="booking-notes">Anything else? (optional)</label><textarea id="booking-notes" maxlength="1000" rows="3"></textarea><p class="small">Please leave out access codes and sensitive details. This form isn’t saved on our website. Continuing opens WhatsApp; you must send the message there.</p><button class="btn primary" id="booking-submit" type="submit" disabled>Request on WhatsApp</button><p id="booking-feedback" role="status"></p><noscript>Please use the WhatsApp link below to request a clean.</noscript></form></div></div>`;
 const footer=document.querySelector("footer");
 if(!footer)return;
 footer.before(section);
@@ -33,8 +33,8 @@ function updateSubmit(){
 }
 el("booking-form").oninput=updateSubmit;
 el("booking-form").onchange=updateSubmit;
-function isCarpet(){return el("booking-service").value==="Carpet Washing";}
-function isMattress(){return el("booking-service").value==="Mattress Washing";}
+function isCarpet(){return el("booking-service").value==="Carpet Washing"||(el("booking-service").value==="Deep Clean"&&el("add-carpet").checked);}
+function isMattress(){return el("booking-service").value==="Mattress Washing"||(el("booking-service").value==="Deep Clean"&&el("add-mattress").checked);}
 function carpetQuote(){
  const w=Number(el("carpet-width").value),l=Number(el("carpet-length").value);
  if(!Number.isFinite(w)||!Number.isFinite(l)||w<=0||l<=0)return null;
@@ -43,9 +43,10 @@ function carpetQuote(){
  return {area,price:tier?.price??null};
 }
 function fabricSummary(){
- if(isCarpet()){const q=carpetQuote();return "Carpet: "+el("carpet-width").value+" m wide × "+el("carpet-length").value+" m long; area "+(q?q.area.toFixed(2):"")+" m².";}
- if(isMattress())return "Mattress size: "+el("mattress-size").value;
- return "";
+ const lines=[];
+ if(isCarpet()){const q=carpetQuote();lines.push("Carpet washing: "+el("carpet-width").value+" m wide × "+el("carpet-length").value+" m long; area "+(q?q.area.toFixed(2):"")+" m²; "+(q?.price!=null?"R"+q.price:"personalised quote required")+".");}
+ if(isMattress()){const tier=priceData?.mattressPrices?.find(t=>t.label===el("mattress-size").value);lines.push("Mattress washing: "+el("mattress-size").value+(tier?"; R"+tier.price:"")+".");}
+ return lines.join("\n");
 }
 function needsBedrooms(){
  return el("booking-service").value==="Deep Clean"||extraInputs.some(({extra,input})=>input.checked&&extra.pricing==="bedrooms");
@@ -98,17 +99,20 @@ function priceEstimate(){
  const service=priceData?.services?.find(s=>s.name===el("booking-service").value);
  if(!service)return "Choose a service to see an estimate.";
  if(needsBedrooms()&&!el("booking-bedrooms").value)return "Choose your property size to calculate the estimate.";
- let price=service.price;
+ let price=service.price,fabricAddition=0,fabricQuote=false;
  if(isCarpet()){
  const q=carpetQuote();
  if(!q)return "Enter a valid width and length in metres to see an estimate.";
- if(q.price===null)return "Area: "+q.area.toFixed(2)+" m² — personalised quote required. Send measurements and photos on WhatsApp.";
- price="R"+q.price;
+ if(q.price===null){
+ if(service.name!=="Deep Clean")return "Area: "+q.area.toFixed(2)+" m² — personalised quote required. Send measurements and photos on WhatsApp.";
+ fabricQuote=true;
+ }else if(service.name==="Deep Clean")fabricAddition+=q.price;
+ else price="R"+q.price;
  }
  if(isMattress()){
  const tier=priceData?.mattressPrices?.find(t=>t.label===el("mattress-size").value);
  if(!tier)return "Choose your mattress size to see an estimate.";
- price="R"+tier.price;
+ if(service.name==="Deep Clean")fabricAddition+=tier.price;else price="R"+tier.price;
  }
  if(service.name==="Deep Clean"){
  const tier=priceData.deepCleanPrices?.find(p=>p.label===el("booking-bedrooms").value);
@@ -116,22 +120,24 @@ function priceEstimate(){
  price=tier.price;
  }
  const extras=selectedExtras(),windows=windowChoice();
- let addition=extras.reduce((sum,item)=>sum+(item.fee??0),0);
+ let addition=fabricAddition+extras.reduce((sum,item)=>sum+(item.fee??0),0);
  if(windows&&!windows.included&&el("booking-windows").checked&&windows.fee!==null)addition+=windows.fee;
  const match=String(price||"").match(/R\s*([\d,]+(?:\.\d+)?)/i);
  const quoteExtras=extras.filter(item=>item.fee===null);
- const quoteNote=quoteExtras.length?" "+quoteExtras.map(item=>item.name).join(", ")+" quoted separately.":"";
+ const carpetNote=fabricQuote?" Carpet washing quoted separately; excluded from this total.":"";
+ const quoteNote=carpetNote+(quoteExtras.length?" "+quoteExtras.map(item=>item.name).join(", ")+" quoted separately.":"");
  if(!match)return "Personalised service quote"+(addition?"; selected priced extras +R"+addition.toLocaleString("en-ZA"):"")+" — send us your requirements and photos on WhatsApp."+quoteNote;
  const total=Number(match[1].replace(/,/g,""))+addition;
  return "Estimated price: "+(/from/i.test(price)?"From ":"around ")+"R"+total.toLocaleString("en-ZA")+quoteNote;
 }
 function updateEstimate(){
+ el("fabric-addons").hidden=el("booking-service").value!=="Deep Clean";
  el("booking-carpet-fields").hidden=!isCarpet();
  el("booking-mattress-fields").hidden=!isMattress();
  ["carpet-width","carpet-length"].forEach(id=>{el(id).required=isCarpet();el(id).disabled=!isCarpet();if(!isCarpet())el(id).setCustomValidity("");});
  el("mattress-size").required=isMattress();el("mattress-size").disabled=!isMattress();
  if(!isMattress())el("mattress-size").setCustomValidity("");
- const fabric=isCarpet()||isMattress();
+ const fabric=["Carpet Washing","Mattress Washing"].includes(el("booking-service").value);
  el("booking-size").hidden=fabric;el("booking-size").required=!fabric;
  document.querySelector('label[for="booking-size"]').hidden=fabric;
  if(fabric)el("booking-size").value=isCarpet()?"Carpet":"Mattress";
@@ -150,7 +156,7 @@ function updateEstimate(){
  updateSubmit();
 }
 el("booking-service").onchange=()=>{el("booking-windows").checked=false;updateEstimate();};
-["carpet-width","carpet-length","mattress-size"].forEach(id=>el(id).addEventListener("input",updateEstimate));
+["add-carpet","add-mattress","carpet-width","carpet-length","mattress-size"].forEach(id=>el(id).addEventListener("input",updateEstimate));
 el("booking-windows").onchange=updateEstimate;
 el("booking-bedrooms").onchange=updateEstimate;
 const key=(y,m,d)=>y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
