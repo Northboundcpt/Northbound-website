@@ -27,6 +27,11 @@
           <p><strong>Best for:</strong> ${escapeHTML(service.bestFor)}</p>
         </article>`).join("");
 
+      const carePrices=document.createElement("section");
+      carePrices.className="section";carePrices.id="fabric-pricing";
+      carePrices.innerHTML=`<div class="wrap"><div class="eyebrow">A little extra care</div><h2>Fresh fabrics. Clear prices.</h2><div class="grid"><div class="card"><h3>Carpet washing</h3><p>From R250 · Price quoted by size</p>${data.carpetPrices.map(t=>`<div class="row"><span>${t.width} m × ${t.length} m</span><strong>R${t.price.toLocaleString("en-ZA")}</strong></div>`).join("")}</div><div class="card"><h3>Mattress washing</h3>${data.mattressPrices.map(t=>`<div class="row"><span>${escapeHTML(t.label)}</span><strong>R${t.price}</strong></div>`).join("")}</div></div><p>Carpet estimates use your width × length in metres, rounded up to the next listed area bracket. Above 12.25 m², request a personalised quote. Prices are per item. Final pricing depends on size, material and condition and is confirmed after reviewing your requirements and photos.</p></div>`;
+      document.querySelector("#services").after(carePrices);
+
       document.querySelector("#pricing .price-list").innerHTML = deepCleanPrices.map((item) => `
         <div class="row"><span>${escapeHTML(item.label)}</span><strong>${escapeHTML(item.price)}</strong></div>`).join("");
       const extrasCard = document.querySelector("#pricing .card");
