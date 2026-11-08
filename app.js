@@ -19,15 +19,17 @@
       document.querySelector(".hero h1 + p").textContent = hero.description;
       document.querySelector(".hero .small").textContent = hero.serviceLine;
 
-      const servicesGrid = document.querySelector("#services .grid");
-      const deepCleanDetails = servicesGrid.querySelector(".deep-clean-details");
-      servicesGrid.innerHTML = services.map((service) => `
+      document.querySelector("#services .grid").innerHTML = services.map((service) => `
         <article class="card">
           <h3>${escapeHTML(service.name)}</h3>
           <div class="price">${escapeHTML(service.price)}</div>
-          <p>${escapeHTML(service.description)}</p>
-          <p><strong>Best for:</strong> ${escapeHTML(service.bestFor)}</p>
-          ${service.name === "Deep Clean" ? deepCleanDetails.outerHTML : ""}
+          <p>${escapeHTML(service.summary)}</p>
+          <details class="service-details">
+            <summary>Click for more<span class="service-details-context"> about ${escapeHTML(service.name)}</span></summary>
+            <p>${escapeHTML(service.description)}</p>
+            <p><strong>Best for:</strong> ${escapeHTML(service.bestFor)}</p>
+            ${(service.details || []).map((paragraph) => `<p>${escapeHTML(paragraph)}</p>`).join("")}
+          </details>
         </article>`).join("");
 
       const carePrices=document.createElement("section");
