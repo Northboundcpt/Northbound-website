@@ -18,43 +18,55 @@
       "name": "Home Reset",
       "price": "R400",
       "description": "Your everyday rescue: one Northie for up to 3 hours of general tidying and cleaning - beds made, dishes washed, surfaces reset and floors swept/vacuumed and mopped.",
-      "bestFor": "Upkeep, busy weeks and a general refresh."
+      "bestFor": "Upkeep, busy weeks and a general refresh.",
+      "summary": "One Northie for up to 3 hours of everyday cleaning and tidying."
     },
     {
       "name": "Deep Clean",
       "price": "From R550",
       "description": "The proper one. Everything in a Home Reset, plus detailed Airbnb-level cleaning, including underneath beds, behind accessible appliances and easily forgotten corners. Standard window washing is included for studio–2-bedroom homes; for 3+ bedrooms, add it for R200.",
-      "bestFor": "A thorough top-to-bottom refresh."
+      "bestFor": "A thorough top-to-bottom refresh.",
+      "summary": "A top-to-bottom clean with window washing included for studios and 1–2 bedroom homes. Team size depends on the home, and R450 can help you finish around two hours sooner.",
+      "details": [
+        "We’ll estimate the time on site in your quote based on your home and what needs cleaning.",
+        "Standard team: 1 housekeeper for studios and 1–2 bedroom homes, or 2 housekeepers for 3+ bedrooms.",
+        "Need your deep clean finished sooner? For R450, we can bring a larger team and aim to finish around two hours sooner, depending on the work involved and team availability."
+      ]
     },
     {
       "name": "Event & Ceremony Cleanup",
       "price": "From R1,500",
       "description": "Umgidi, umcimbi, birthdays and family gatherings. We can tackle large cooking pots, dishes, kitchens, bathrooms, floors, rubbish, yards and general post-event cleanup.",
-      "bestFor": "Final pricing depends on the scale of the event and work required."
+      "bestFor": "Final pricing depends on the scale of the event and work required.",
+      "summary": "Help with dishes, rubbish, indoor spaces and yards after gatherings. Final pricing depends on the work involved."
     },
     {
       "name": "Carpet Washing",
       "price": "From R250",
       "description": "Price quoted by size. Enter your carpet width and length when booking for an estimate.",
-      "bestFor": "Carpets and rugs that need a fresh start."
+      "bestFor": "Carpets and rugs that need a fresh start.",
+      "summary": "A refresh for carpets and rugs, with an estimate based on measurements."
     },
     {
       "name": "Mattress Washing",
       "price": "From R250",
       "description": "Choose your mattress size when booking to see an estimate.",
-      "bestFor": "A refresh for your sleeping space."
+      "bestFor": "A refresh for your sleeping space.",
+      "summary": "Freshen up your mattress. Select its size when booking for an estimate."
     },
     {
       "name": "Couch Cleaning",
       "price": "Quote on request",
       "description": "Send photos, couch size and your suburb for a personalised quote.",
-      "bestFor": "Couches and upholstered seating."
+      "bestFor": "Couches and upholstered seating.",
+      "summary": "Cleaning for couches and upholstered seating. Send photos, couch size and your suburb for a quote."
     },
     {
       "name": "Window Washing",
       "price": "R200",
       "description": "A clearer view, without a full house clean. Standard window washing is R200. Large glass areas and unusually dirty or hard-to-reach windows are quoted separately.",
-      "bestFor": "Standard, safely reachable windows. Large glass areas and unusually dirty or hard-to-reach windows are quoted separately."
+      "bestFor": "Standard, safely reachable windows. Large glass areas and unusually dirty or hard-to-reach windows are quoted separately.",
+      "summary": "Standard, safely reachable windows for R200. Larger or more difficult jobs are quoted separately."
     }
   ],
   "deepCleanPrices": [
