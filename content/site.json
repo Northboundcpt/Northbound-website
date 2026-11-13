@@ -23,10 +23,10 @@
     },
     {
       "name": "Deep Clean",
-      "price": "From R550",
+      "price": "Priced per room",
       "description": "The proper one. Everything in a Home Reset, plus detailed Airbnb-level cleaning, including underneath beds, behind accessible appliances and easily forgotten corners. Standard window washing is included for studio–2-bedroom homes; for 3+ bedrooms, add it for R200.",
       "bestFor": "A thorough top-to-bottom refresh.",
-      "summary": "A top-to-bottom clean with window washing included for studios and 1–2 bedroom homes. Team size depends on the home, and R450 can help you finish around two hours sooner.",
+      "summary": "A top-to-bottom clean, priced by the spaces you choose. Build your clean for an instant estimate.",
       "details": [
         "We’ll estimate the time on site in your quote based on your home and what needs cleaning.",
         "Standard team: 1 housekeeper for studios and 1–2 bedroom homes, or 2 housekeepers for 3+ bedrooms.",
@@ -69,22 +69,41 @@
       "summary": "Standard, safely reachable windows for R200. Larger or more difficult jobs are quoted separately."
     }
   ],
-  "deepCleanPrices": [
+  "deepCleanRooms": [
     {
-      "label": "Studio / 1 bedroom",
-      "price": "R550"
+      "id": "bedrooms",
+      "label": "Bedrooms",
+      "price": 200
     },
     {
-      "label": "2 bedroom",
-      "price": "R750"
+      "id": "bathrooms",
+      "label": "Bathrooms",
+      "price": 200
     },
     {
-      "label": "3 bedroom",
-      "price": "R950"
+      "id": "kitchens",
+      "label": "Kitchens",
+      "price": 400
     },
     {
-      "label": "4+ bedroom",
-      "price": "From R1,100"
+      "id": "sculleries",
+      "label": "Sculleries",
+      "price": 150
+    },
+    {
+      "id": "lounges",
+      "label": "Lounges",
+      "price": 100
+    },
+    {
+      "id": "dining-rooms",
+      "label": "Dining rooms",
+      "price": 75
+    },
+    {
+      "id": "outdoor",
+      "label": "Patio, balcony or stoep",
+      "price": 150
     }
   ],
   "extras": {
