@@ -14,6 +14,10 @@ section.innerHTML = `
       <li>2 · Build your clean</li>
       <li>3 · Pick a date & send</li>
     </ol>
+    <div class="booking-milestone">
+      <p id="booking-milestone" role="status"></p>
+      <span id="booking-sparkles" aria-hidden="true">✦ ✧ ✦</span>
+    </div>
     <div id="booking-step-1">
       <h3 tabindex="-1">What needs a little love?</h3>
       <label for="booking-service">Choose a service</label>
@@ -24,14 +28,14 @@ section.innerHTML = `
       <h3 tabindex="-1">Make it yours</h3>
       <fieldset id="room-fields" hidden>
         <legend>Which spaces are we cleaning?</legend>
-        <p class="small">Count only the rooms you want cleaned. Leave the others at zero.</p>
+        <p class="small">Count only the rooms you want cleaned. Leave the others at zero. Standard, safely reachable windows are included in every room you select for a Deep Clean.</p>
         <div id="room-counts" class="room-counts"></div>
         <label id="outdoor-option"><input type="checkbox" id="add-outdoor"> Sweep the patio, balcony or stoep and wipe down the outdoor furniture <span id="outdoor-rate"></span></label>
         <div id="outdoor-count" hidden></div>
       </fieldset>
       <label for="booking-size" hidden>Tell us what needs cleaning</label>
       <input id="booking-size" maxlength="150" hidden>
-      <fieldset id="fabric-addons" hidden><legend>Optional carpet & mattress washing</legend><label><input type="checkbox" id="add-carpet"> Add carpet washing — from R250</label><label><input type="checkbox" id="add-mattress"> Add mattress washing — from R250</label></fieldset><div id="booking-carpet-fields" hidden><label for="carpet-width">Carpet width (metres)</label><input id="carpet-width" type="number" min="0.01" step="0.01" placeholder="e.g. 2"><label for="carpet-length">Carpet length (metres)</label><input id="carpet-length" type="number" min="0.01" step="0.01" placeholder="e.g. 3"><p class="small">One carpet per request. Estimate uses width × length, rounded up to the next listed area bracket. Above 12.25 m² is quoted separately. Final price depends on material and condition.</p></div><div id="booking-mattress-fields" hidden><label for="mattress-size">Mattress size</label><select id="mattress-size"><option value="">Choose a mattress size</option></select><p class="small">Price per mattress. Mention additional items in “Anything else?”.</p></div><div id="booking-bedroom-field" hidden><label for="booking-bedrooms">Bedrooms for linen change</label><select id="booking-bedrooms"><option value="">Choose your property size</option></select></div><div id="booking-window-field" hidden><p id="booking-window-info"></p><label id="booking-window-option"><input id="booking-windows" type="checkbox"> <span id="booking-window-label"></span></label><p class="small" id="booking-window-scope"></p></div><fieldset id="booking-extras"><legend>Optional extras</legend><div id="booking-extras-list"></div></fieldset>
+      <fieldset id="fabric-addons" hidden><legend>Optional carpet & mattress washing</legend><label><input type="checkbox" id="add-carpet"> Add carpet washing — from R250</label><label><input type="checkbox" id="add-mattress"> Add mattress washing — from R250</label></fieldset><div id="booking-carpet-fields" hidden><label for="carpet-width">Carpet width (metres)</label><input id="carpet-width" type="number" min="0.01" step="0.01" placeholder="e.g. 2"><label for="carpet-length">Carpet length (metres)</label><input id="carpet-length" type="number" min="0.01" step="0.01" placeholder="e.g. 3"><p class="small">One carpet per request. Estimate uses width × length, rounded up to the next listed area bracket. Above 12.25 m² is quoted separately. Final price depends on material and condition.</p></div><div id="booking-mattress-fields" hidden><label for="mattress-size">Mattress size</label><select id="mattress-size"><option value="">Choose a mattress size</option></select><p class="small">Price per mattress. Mention additional items in “Anything else?”.</p></div><div id="booking-bedroom-field" hidden><label for="booking-bedrooms">Bedrooms for linen change</label><select id="booking-bedrooms"><option value="">Choose your property size</option></select></div><fieldset id="booking-extras"><legend>Optional extras</legend><div id="booking-extras-list"></div></fieldset>
       <label for="booking-notes">Anything else? (optional)</label>
       <textarea id="booking-notes" maxlength="1000" rows="2"></textarea>
     </div>
@@ -73,6 +77,12 @@ style.textContent+=`
 .booking-progress li[aria-current="step"]{background:var(--teal);color:var(--white);font-weight:800}
 .booking-progress .done{background:var(--mint)}
 .booking-progress .done::after{content:" ✓"}
+.booking-milestone{position:relative;margin-top:-.8rem;color:var(--teal);font-weight:800}
+#booking-milestone{margin:0 0 .85rem;padding-right:4rem}
+#booking-milestone:empty{margin:0}
+#booking-sparkles{position:absolute;right:0;top:0;opacity:0;color:#a54530;pointer-events:none}
+@keyframes booking-ready-pop{from{transform:scale(.97);opacity:.65}to{transform:scale(1);opacity:1}}
+@media(prefers-reduced-motion:no-preference){#booking-ready:not([hidden]){animation:booking-ready-pop .32s ease-out}}
 .booking-actions{display:flex;flex-wrap:wrap;gap:.6rem}
 #booking .booking-actions button{font-weight:800}
 #booking-ready{border-radius:.85rem;background:var(--yellow);padding:.8rem 1rem;font-weight:800}
@@ -181,9 +191,24 @@ el("booking-next").onclick=()=>{
    :"Please fill in the details for your chosen clean.";
   return;
  }
+ const message=step===1?"Nice pick! Let’s make it yours.":"Clean plan complete! Pick your day.";
  showStep(step+1);
+ el("booking-milestone").textContent=message;
+ if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  const sparkles=el("booking-sparkles");
+  sparkles.getAnimations().forEach(animation=>animation.cancel());
+  sparkles.animate([
+   {opacity:0,transform:"translateY(.4rem) scale(.7)"},
+   {opacity:1,transform:"translateY(0) scale(1.1)",offset:.35},
+   {opacity:0,transform:"translateY(-.7rem) scale(1)"}
+  ],{duration:650,easing:"ease-out"});
+ }
 };
-el("booking-back").onclick=()=>showStep(step-1);
+el("booking-back").onclick=()=>{
+ el("booking-milestone").textContent="";
+ el("booking-sparkles").getAnimations().forEach(animation=>animation.cancel());
+ showStep(step-1);
+};
 el("booking-form").oninput=()=>{
  el("booking-feedback").textContent="";
  updateEstimate();
@@ -235,18 +260,6 @@ function renderExtras(){
  });
  el("booking-extras").hidden=!extraInputs.length;
 }
-function windowChoice(){
- if(!isDeep()||!roomsComplete())return null;
- const bedrooms=bedroomCount();
- const amount=Number(priceData?.extras?.windowWashing?.largeHomeAddon);
- return {included:bedrooms<=2,fee:Number.isFinite(amount)&&amount>=0?amount:null};
-}
-function windowSummary(){
- const choice=windowChoice();
- if(!choice)return "";
- if(choice.included)return "Window washing: included (standard, safely reachable windows).";
- return el("booking-windows").checked&&choice.fee!==null?"Window washing: requested (+R"+choice.fee+").":"Window washing: not selected.";
-}
 function priceEstimate(){
  const service=priceData?.services?.find(s=>s.name===el("booking-service").value);
  if(!service)return "Choose a service to see an estimate.";
@@ -270,9 +283,8 @@ function priceEstimate(){
   if(!roomsComplete())return "Add at least one space to see your estimate.";
   price="R"+roomEstimate();
  }
- const extras=selectedExtras(),windows=windowChoice();
- let addition=fabricAddition+extras.reduce((sum,item)=>sum+(item.fee??0),0);
- if(windows&&!windows.included&&el("booking-windows").checked&&windows.fee!==null)addition+=windows.fee;
+ const extras=selectedExtras();
+ const addition=fabricAddition+extras.reduce((sum,item)=>sum+(item.fee??0),0);
  const match=String(price||"").match(/R\s*([\d,]+(?:\.\d+)?)/i);
  const quoteExtras=extras.filter(item=>item.fee===null);
  const carpetNote=fabricQuote?" Carpet washing quoted separately; excluded from this total.":"";
@@ -301,19 +313,13 @@ function updateEstimate(){
  const bedroomsRequired=needsBedrooms();
  el("booking-bedroom-field").hidden=!bedroomsRequired;
  el("booking-bedrooms").required=bedroomsRequired;
- const windows=windowChoice();
- el("booking-window-field").hidden=!windows;
- el("booking-window-option").hidden=!windows||windows.included||windows.fee===null;
- el("booking-window-info").textContent=windows?.included?"Standard window washing is included in your Deep Clean.":"Add standard window washing to your Deep Clean (optional).";
- el("booking-window-label").textContent="Yes, wash my windows (+R"+(windows?.fee??"")+")";
- el("booking-window-scope").textContent=priceData?.extras?.windowWashing?.scope||"";
  el("booking-estimate").textContent=priceEstimate();
  updateSubmit();
 }
 el("booking-service").onchange=()=>{
  el("booking-size").value="";
  el("booking-bedrooms").value="";
- for(const id of ["booking-windows","add-carpet","add-mattress","add-outdoor"])el(id).checked=false;
+ for(const id of ["add-carpet","add-mattress","add-outdoor"])el(id).checked=false;
  for(const {input} of extraInputs)input.checked=false;
  el("service-preview").textContent=priceData?.services.find(service=>service.name===serviceName())?.summary||"";
  updateEstimate();
@@ -379,7 +385,7 @@ el("booking-form").onsubmit=async event=>{
   sizePrompts[serviceName()]&&"Scope: "+el("booking-size").value.trim(),
   needsBedrooms()&&"Bedrooms for linen change: "+el("booking-bedrooms").selectedOptions[0].textContent,
   fabricSummary(),
-  windowSummary(),
+  isDeep()&&"Window washing: included for standard, safely reachable windows in selected rooms.",
   ...selectedExtras().map(item=>item.name+": "+(item.fee===null?"quote requested":"+"+money(item.fee))),
   "Website estimate: "+priceEstimate(),
   el("booking-notes").value.trim()&&"Notes: "+el("booking-notes").value.trim(),

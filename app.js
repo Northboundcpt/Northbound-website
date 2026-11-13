@@ -40,7 +40,7 @@
       document.querySelector("#pricing .price-list").innerHTML = deepCleanRooms.map((item) => `
         <div class="row"><span>${escapeHTML(item.label)}</span><strong>R${escapeHTML(item.price)} each</strong></div>`).join("");
       const extrasCard = document.querySelector("#pricing .card");
-      extrasCard.innerHTML = `<h3>${escapeHTML(extras.heading || "Add a little extra care")}</h3><p><strong>Window washing</strong><br>R200 · Standard, safely reachable windows. Included in studio–2-bedroom Deep Cleans; optional +R200 for larger Deep Cleans.</p>
+      extrasCard.innerHTML = `<h3>${escapeHTML(extras.heading || "Add a little extra care")}</h3>
         <p><strong>${escapeHTML(extras.linenChangeHeading || "Linen change")}</strong><br>${escapeHTML(extras.linenChange)}</p>
         ${extras.linenIroning ? `<p><strong>${escapeHTML(extras.linenIroningHeading || "Linen ironing")}</strong><br>${escapeHTML(extras.linenIroning)}</p>` : ""}
         <p><strong>${escapeHTML(extras.linenLaundryHeading || "Laundry drop-off")}</strong><br>${escapeHTML(extras.linenLaundry)}</p>
