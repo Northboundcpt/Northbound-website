@@ -24,7 +24,7 @@
     {
       "name": "Deep Clean",
       "price": "Priced per room",
-      "description": "The proper one. Everything in a Home Reset, plus detailed Airbnb-level cleaning, including underneath beds, behind accessible appliances and easily forgotten corners. Standard window washing is included for studio–2-bedroom homes; for 3+ bedrooms, add it for R200.",
+      "description": "The proper one. Everything in a Home Reset, plus detailed Airbnb-level cleaning, including underneath beds, behind accessible appliances and easily forgotten corners. Standard, safely reachable windows are included in every room you select for a Deep Clean.",
       "bestFor": "A thorough top-to-bottom refresh.",
       "summary": "A top-to-bottom clean, priced by the spaces you choose. Build your clean for an instant estimate.",
       "details": [
@@ -114,11 +114,7 @@
     "linenIroning": "+R150",
     "linenLaundryHeading": "Laundry drop-off",
     "linenLaundry": "Drop-off to Pressed on Point - quote on request.",
-    "note": "Please provide fresh, ready-to-use bedding. Linen change covers removing and replacing bedding using what you supply; washing, ironing and other preparation are excluded. Linen ironing can be added for R150. Laundry drop-off is quoted separately for approval.",
-    "windowWashing": {
-      "largeHomeAddon": 200,
-      "scope": "Standard, safely reachable windows. Large glass areas and unusually dirty or hard-to-reach windows are quoted separately."
-    }
+    "note": "Please provide fresh, ready-to-use bedding. Linen change covers removing and replacing bedding using what you supply; washing, ironing and other preparation are excluded. Linen ironing can be added for R150. Laundry drop-off is quoted separately for approval."
   },
   "propertyServices": [
     {
