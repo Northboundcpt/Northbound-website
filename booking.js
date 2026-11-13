@@ -3,36 +3,192 @@
 const section=document.createElement("section");
 section.className="section";
 section.id="booking";
-section.innerHTML=`<div class="wrap"><div class="eyebrow">Your home. Your time.</div><h2>Book your Northie.</h2><p>Choose your care and a date. Send us your request on WhatsApp and we’ll confirm the team, price and timing.</p><p>Monday–Saturday · 08:00–20:00. All work must finish by 20:00. Up to four cleans per day, subject to team availability.</p><div class="booking-layout"><div class="card"><h3>Choose a date</h3><p class="small">Highlighted dates are open for requests. A date is reserved only once we confirm.</p><div class="calendar-nav"><button type="button" id="previous-month" aria-label="Previous month">←</button><strong id="calendar-month"></strong><button type="button" id="next-month" aria-label="Next month">→</button></div><div id="booking-calendar" class="booking-calendar" role="group" aria-label="Available dates"></div><p id="availability-status" role="status">Loading availability…</p></div><form class="card" id="booking-form"><h3>A little about your clean</h3><p class="small">All fields are required except optional extras and “Anything else?”. Choose a date to enable your request.</p><label for="booking-service">Service</label><select id="booking-service" required><option value="">Choose a service</option></select><label for="booking-date">Selected date</label><input id="booking-date" type="text" readonly required placeholder="Choose a highlighted date"><label for="booking-time">Preferred start time</label><select id="booking-time" required><option value="">Choose a time</option><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select><p class="small">Start times depend on the service duration and travel. Larger jobs need an earlier start.</p><label for="booking-name">Your name</label><input id="booking-name" autocomplete="name" maxlength="100" required><label for="booking-area">Suburb</label><input id="booking-area" maxlength="100" required><label for="booking-size">Property or item size</label><input id="booking-size" maxlength="150" placeholder="e.g. 2 bedrooms or a 2-seater couch" required><fieldset id="fabric-addons" hidden><legend>Optional carpet & mattress washing</legend><label><input type="checkbox" id="add-carpet"> Add carpet washing — from R250</label><label><input type="checkbox" id="add-mattress"> Add mattress washing — from R250</label></fieldset><div id="booking-carpet-fields" hidden><label for="carpet-width">Carpet width (metres)</label><input id="carpet-width" type="number" min="0.01" step="0.01" placeholder="e.g. 2"><label for="carpet-length">Carpet length (metres)</label><input id="carpet-length" type="number" min="0.01" step="0.01" placeholder="e.g. 3"><p class="small">One carpet per request. Estimate uses width × length, rounded up to the next listed area bracket. Above 12.25 m² is quoted separately. Final price depends on material and condition.</p></div><div id="booking-mattress-fields" hidden><label for="mattress-size">Mattress size</label><select id="mattress-size"><option value="">Choose a mattress size</option></select><p class="small">Price per mattress. Mention additional items in “Anything else?”.</p></div><div id="booking-bedroom-field" hidden><label for="booking-bedrooms">Property size for your estimate</label><select id="booking-bedrooms"><option value="">Choose your property size</option></select></div><div id="booking-window-field" hidden><p id="booking-window-info"></p><label id="booking-window-option"><input id="booking-windows" type="checkbox"> <span id="booking-window-label"></span></label><p class="small" id="booking-window-scope"></p></div><fieldset id="booking-extras"><legend>Optional extras</legend><div id="booking-extras-list"></div></fieldset><div class="booking-estimate" role="status" aria-live="polite"><strong id="booking-estimate">Choose a service to see an estimate.</strong><p class="small">This is a guide, not an official quote. Selected priced extras are included in the estimate. Laundry and any other quote-only extras are quoted separately. We’ll review your requirements and send an official quote before you confirm.</p></div><label for="booking-notes">Anything else? (optional)</label><textarea id="booking-notes" maxlength="1000" rows="3"></textarea><p class="small">Please leave out access codes and sensitive details. This form isn’t saved on our website. Continuing opens WhatsApp; you must send the message there.</p><button class="btn primary" id="booking-submit" type="submit" disabled>Request on WhatsApp</button><p id="booking-feedback" role="status"></p><noscript>Please use the WhatsApp link below to request a clean.</noscript></form></div></div>`;
+section.innerHTML = `
+<div class="wrap">
+  <div class="eyebrow">Your home. Your time.</div>
+  <h2>Book your Northie.</h2>
+  <p>Three quick steps to a fresher home. Get an estimate, then send your request on WhatsApp.</p>
+  <form class="card" id="booking-form" novalidate>
+    <ol class="booking-progress" aria-label="Booking progress">
+      <li aria-current="step">1 · Pick your clean</li>
+      <li>2 · Build your clean</li>
+      <li>3 · Pick a date & send</li>
+    </ol>
+    <div id="booking-step-1">
+      <h3 tabindex="-1">What needs a little love?</h3>
+      <label for="booking-service">Choose a service</label>
+      <select id="booking-service" required><option value="">Choose a service</option></select>
+      <p id="service-preview" class="small"></p>
+    </div>
+    <div id="booking-step-2" hidden>
+      <h3 tabindex="-1">Make it yours</h3>
+      <fieldset id="room-fields" hidden>
+        <legend>Which spaces are we cleaning?</legend>
+        <p class="small">Count only the rooms you want cleaned. Leave the others at zero.</p>
+        <div id="room-counts" class="room-counts"></div>
+        <label id="outdoor-option"><input type="checkbox" id="add-outdoor"> Sweep the patio, balcony or stoep and wipe down the outdoor furniture <span id="outdoor-rate"></span></label>
+        <div id="outdoor-count" hidden></div>
+      </fieldset>
+      <label for="booking-size" hidden>Tell us what needs cleaning</label>
+      <input id="booking-size" maxlength="150" hidden>
+      <fieldset id="fabric-addons" hidden><legend>Optional carpet & mattress washing</legend><label><input type="checkbox" id="add-carpet"> Add carpet washing — from R250</label><label><input type="checkbox" id="add-mattress"> Add mattress washing — from R250</label></fieldset><div id="booking-carpet-fields" hidden><label for="carpet-width">Carpet width (metres)</label><input id="carpet-width" type="number" min="0.01" step="0.01" placeholder="e.g. 2"><label for="carpet-length">Carpet length (metres)</label><input id="carpet-length" type="number" min="0.01" step="0.01" placeholder="e.g. 3"><p class="small">One carpet per request. Estimate uses width × length, rounded up to the next listed area bracket. Above 12.25 m² is quoted separately. Final price depends on material and condition.</p></div><div id="booking-mattress-fields" hidden><label for="mattress-size">Mattress size</label><select id="mattress-size"><option value="">Choose a mattress size</option></select><p class="small">Price per mattress. Mention additional items in “Anything else?”.</p></div><div id="booking-bedroom-field" hidden><label for="booking-bedrooms">Bedrooms for linen change</label><select id="booking-bedrooms"><option value="">Choose your property size</option></select></div><div id="booking-window-field" hidden><p id="booking-window-info"></p><label id="booking-window-option"><input id="booking-windows" type="checkbox"> <span id="booking-window-label"></span></label><p class="small" id="booking-window-scope"></p></div><fieldset id="booking-extras"><legend>Optional extras</legend><div id="booking-extras-list"></div></fieldset>
+      <label for="booking-notes">Anything else? (optional)</label>
+      <textarea id="booking-notes" maxlength="1000" rows="2"></textarea>
+    </div>
+    <div id="booking-step-3" hidden>
+      <h3 tabindex="-1">When should we come?</h3>
+      <div class="booking-layout">
+        <div class="card"><h3>Choose a date</h3><p class="small">Highlighted dates are open for requests. A date is reserved only once we confirm.</p><div class="calendar-nav"><button type="button" id="previous-month" aria-label="Previous month">←</button><strong id="calendar-month"></strong><button type="button" id="next-month" aria-label="Next month">→</button></div><div id="booking-calendar" class="booking-calendar" role="group" aria-label="Available dates"></div><p id="availability-status" role="status">Loading availability…</p></div>
+        <div>
+          <label for="booking-date">Selected date</label>
+          <input id="booking-date" type="text" readonly placeholder="Choose a highlighted date">
+          <label for="booking-time">Preferred start time</label><select id="booking-time" required><option value="">Choose a time</option><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select><label for="booking-name">Your name</label><input id="booking-name" autocomplete="name" maxlength="100" required><label for="booking-area">Suburb</label><input id="booking-area" maxlength="100" required>
+          <p class="small">Monday–Saturday · 08:00–20:00. All work must finish by 20:00. Start times and dates are subject to confirmation.</p>
+        </div>
+      </div>
+      <p class="small">Please leave out access codes and sensitive details. We’ll prepare your message. Tap Send in WhatsApp to complete your request.</p>
+    </div>
+    <div class="booking-estimate" id="estimate-panel" role="status" hidden>
+      <strong id="booking-estimate"></strong>
+      <p class="small">Your estimate includes priced extras. We’ll confirm the final quote and availability on WhatsApp.</p>
+    </div>
+    <p id="booking-ready" role="status" hidden>🎉 Winner winner, chicken dinner! Your request is ready for WhatsApp.</p>
+    <p id="booking-feedback" role="status"></p>
+    <div class="booking-actions">
+      <button class="btn secondary" type="button" id="booking-back" hidden>Back</button>
+      <button class="btn primary" type="button" id="booking-next">Build my clean</button>
+      <button class="btn primary" id="booking-submit" type="submit" hidden disabled>Open WhatsApp</button>
+    </div>
+  </form>
+</div>`;
 const footer=document.querySelector("footer");
 if(!footer)return;
 footer.before(section);
 const style=document.createElement("style");
 style.textContent=`.booking-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}#booking{scroll-margin-top:100px}#booking [hidden]{display:none!important}#booking label{display:block;font-weight:bold;margin:1rem 0 .3rem}#booking input,#booking select,#booking textarea{width:100%;padding:.8rem;border:1px solid #999;border-radius:10px;background:#fffdf7;color:#17223a;font:inherit}#booking button{font:inherit;cursor:pointer}#booking button:disabled{cursor:default;opacity:.45}.calendar-nav{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin:1.5rem 0}.calendar-nav button{padding:.6rem 1rem;border:1px solid #999;border-radius:10px;background:transparent}.booking-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.booking-calendar>span{text-align:center;font-size:.8rem;padding:.4rem 0}.booking-calendar button{border:1px solid #d7d1c0;border-radius:8px;min-height:42px;background:#e7eadf;color:#17223a}.booking-calendar button:disabled{background:transparent}.booking-calendar button[aria-pressed="true"]{background:#d7a63b;outline:2px solid #17223a}.booking-estimate{margin:1.25rem 0;padding:1rem;border-radius:14px;background:#e8dfc8}.booking-estimate .small{margin-bottom:0}#booking-extras{border:1px solid #b8ad94;border-radius:14px;margin:1.25rem 0;padding:1rem}#booking-extras legend{font-weight:bold}#booking-extras .small{margin-top:.25rem}#booking input[type="checkbox"]{width:auto;margin-right:.5rem}#booking-submit{border:0}#booking :focus-visible{outline:3px solid #b34b2a;outline-offset:3px}@media(max-width:820px){.booking-layout{grid-template-columns:1fr}}`;
+style.textContent+=`
+#booking-form{max-width:860px;margin-top:2rem}
+.booking-progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;list-style:none;padding:0;margin:0 0 1.5rem}
+.booking-progress li{border-radius:.75rem;background:var(--cream);padding:.65rem;font-size:.85rem}
+.booking-progress li[aria-current="step"]{background:var(--teal);color:var(--white);font-weight:800}
+.booking-progress .done{background:var(--mint)}
+.booking-progress .done::after{content:" ✓"}
+.booking-actions{display:flex;flex-wrap:wrap;gap:.6rem}
+#booking .booking-actions button{font-weight:800}
+#booking-ready{border-radius:.85rem;background:var(--yellow);padding:.8rem 1rem;font-weight:800}
+#room-fields,#fabric-addons{margin:1rem 0;border:1px solid var(--line);border-radius:1rem;padding:1rem;min-width:0}
+#room-fields legend,#fabric-addons legend{font-weight:800}
+.room-counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem 1rem}
+#booking #outdoor-option{margin-top:1.25rem}
+.booking-layout>.card{min-width:0}
+@media(max-width:430px){.booking-progress li{padding:.45rem;font-size:.72rem}.booking-calendar{gap:3px}.booking-layout>.card{padding:.75rem}}
+`;
 document.head.append(style);
 document.querySelectorAll(".nav .btn,.hero .btn.primary,.mobile-book").forEach(a=>a.href="#booking");
 const el=id=>document.getElementById(id);
 const today=new Intl.DateTimeFormat("en-CA",{timeZone:"Africa/Johannesburg",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 const parts=today.split("-").map(Number);
 let year=parts[0],month=parts[1]-1,selected="",dates=new Set(),settings=null;
-let priceData=null,submitting=false,extraInputs=[];
-function updateSubmit(){
- const required=["booking-service","booking-time","booking-name","booking-area","booking-size"];
- if(isCarpet())required.push("carpet-width","carpet-length");
- if(isMattress())required.push("mattress-size");
- if(needsBedrooms())required.push("booking-bedrooms");
- let complete=true;
- required.forEach(id=>{
- const input=el(id),filled=String(input.value||"").trim().length>0;
- input.setCustomValidity(filled?"":"Please fill in this field.");
- if(!filled||!input.checkValidity())complete=false;
- });
- const ready=!!settings?.enabled&&!!selected&&allowed(selected)&&complete&&!submitting;
- el("booking-submit").disabled=!ready;
- return ready;
+let priceData=null,submitting=false,extraInputs=[],roomInputs=[],step=1;
+const serviceName=()=>el("booking-service").value;
+const isDeep=()=>serviceName()==="Deep Clean";
+const hasLinenExtras=()=>["Deep Clean","Home Reset"].includes(serviceName());
+const sizePrompts={
+ "Home Reset":["How many bedrooms are we refreshing?","e.g. 2 bedrooms"],
+ "Event & Ceremony Cleanup":["What kind of event are we cleaning up after?","e.g. Birthday, 25 guests, kitchen and yard"],
+ "Couch Cleaning":["What size is your couch?","e.g. 2-seater"],
+ "Window Washing":["Which windows would you like washed?","e.g. 4 standard windows, ground floor"]
+};
+const money=amount=>"R"+amount.toLocaleString("en-ZA");
+const bedroomCount=()=>isDeep()?roomCount("bedrooms"):Number(el("booking-bedrooms").value);
+function roomCount(id){
+ return Number(roomInputs.find(({room})=>room.id===id)?.input.value)||0;
 }
-el("booking-form").oninput=updateSubmit;
-el("booking-form").onchange=updateSubmit;
+function activeRooms(){
+ return roomInputs.filter(({room})=>room.id!=="outdoor"||el("add-outdoor").checked);
+}
+function roomsComplete(){
+ return activeRooms().every(({input})=>input.value!==""&&input.checkValidity())&&
+  activeRooms().some(({input})=>Number(input.value)>0);
+}
+function roomEstimate(){
+ return activeRooms().reduce((sum,{room,input})=>sum+Number(input.value)*room.price,0);
+}
+function renderRooms(){
+ for(const room of priceData.deepCleanRooms||[]){
+  const row=document.createElement("div"),label=document.createElement("label"),input=document.createElement("input");
+  input.id="room-"+room.id;
+  input.type="number";
+  input.min=room.id==="outdoor"?"1":"0";
+  input.max="99";
+  input.step="1";
+  input.value=input.min;
+  input.inputMode="numeric";
+  label.htmlFor=input.id;
+  label.textContent=room.label+" · "+money(room.price)+" each";
+  row.append(label,input);
+  el(room.id==="outdoor"?"outdoor-count":"room-counts").append(row);
+  if(room.id==="outdoor")el("outdoor-rate").textContent="("+money(room.price)+" per space)";
+  roomInputs.push({room,input});
+ }
+}
+function detailFields(){
+ const fields=[];
+ if(sizePrompts[serviceName()])fields.push("booking-size");
+ if(isCarpet())fields.push("carpet-width","carpet-length");
+ if(isMattress())fields.push("mattress-size");
+ if(needsBedrooms())fields.push("booking-bedrooms");
+ return fields;
+}
+function fieldsComplete(ids){
+ return ids.every(id=>String(el(id).value).trim()&&el(id).checkValidity());
+}
+function detailsComplete(){
+ return fieldsComplete(detailFields())&&(!isDeep()||roomsComplete());
+}
+function updateSubmit(){
+ const ready=step===3&&!submitting&&settings?.enabled&&selected&&allowed(selected)&&
+  fieldsComplete(["booking-service","booking-time","booking-name","booking-area"])&&detailsComplete();
+ el("booking-submit").disabled=!ready;
+ el("booking-ready").hidden=!ready;
+ return !!ready;
+}
+function showStep(next){
+ step=next;
+ for(let number=1;number<=3;number++)el("booking-step-"+number).hidden=number!==step;
+ section.querySelectorAll(".booking-progress li").forEach((item,index)=>{
+  if(index===step-1)item.setAttribute("aria-current","step");
+  else item.removeAttribute("aria-current");
+  item.classList.toggle("done",index<step-1);
+ });
+ el("estimate-panel").hidden=step===1;
+ el("booking-back").hidden=step===1;
+ el("booking-next").hidden=step===3;
+ el("booking-next").textContent=step===1?"Build my clean":"Pick a date";
+ el("booking-submit").hidden=step!==3;
+ el("booking-feedback").textContent="";
+ el("booking-step-"+step).querySelector("h3").focus();
+ updateSubmit();
+}
+el("booking-next").onclick=()=>{
+ if(step===1&&!el("booking-service").value){
+  el("booking-service").reportValidity();
+  return;
+ }
+ if(step===2&&!detailsComplete()){
+  el("booking-feedback").textContent=isDeep()&&!roomsComplete()
+   ?"Choose at least one space and check your room counts."
+   :"Please fill in the details for your chosen clean.";
+  return;
+ }
+ showStep(step+1);
+};
+el("booking-back").onclick=()=>showStep(step-1);
+el("booking-form").oninput=()=>{
+ el("booking-feedback").textContent="";
+ updateEstimate();
+};
+el("booking-form").onchange=updateEstimate;
 function isCarpet(){return el("booking-service").value==="Carpet Washing"||(el("booking-service").value==="Deep Clean"&&el("add-carpet").checked);}
 function isMattress(){return el("booking-service").value==="Mattress Washing"||(el("booking-service").value==="Deep Clean"&&el("add-mattress").checked);}
 function carpetQuote(){
@@ -49,15 +205,15 @@ function fabricSummary(){
  return lines.join("\n");
 }
 function needsBedrooms(){
- return el("booking-service").value==="Deep Clean"||extraInputs.some(({extra,input})=>input.checked&&extra.pricing==="bedrooms");
+ return hasLinenExtras()&&!isDeep()&&extraInputs.some(({extra,input})=>input.checked&&extra.pricing==="bedrooms");
 }
 function selectedExtras(){
- return extraInputs.filter(({input})=>input.checked).map(({extra})=>{
+ return extraInputs.filter(({input})=>hasLinenExtras()&&input.checked).map(({extra})=>{
  let fee=null;
  if(extra.pricing==="fixed")fee=Number(extra.price);
  if(extra.pricing==="bedrooms"){
- const bedrooms=Number(el("booking-bedrooms").value.match(/\d+/)?.[0]);
- if(bedrooms>0)fee=Number(bedrooms<=3?extra.smallHomePrice:extra.largeHomePrice);
+ const bedrooms=bedroomCount();
+ if(isDeep()||bedrooms>0)fee=Number(bedrooms<=3?extra.smallHomePrice:extra.largeHomePrice);
  }
  return {name:extra.name,fee:Number.isFinite(fee)&&fee>=0?fee:null};
  });
@@ -80,12 +236,8 @@ function renderExtras(){
  el("booking-extras").hidden=!extraInputs.length;
 }
 function windowChoice(){
- if(el("booking-service").value!=="Deep Clean")return null;
- const label=el("booking-bedrooms").value;
- const tier=priceData?.deepCleanPrices?.find(p=>p.label===label);
- if(!tier)return null;
- const bedrooms=Number(label.match(/\d+/)?.[0]);
- if(!Number.isFinite(bedrooms)||bedrooms<1)return null;
+ if(!isDeep()||!roomsComplete())return null;
+ const bedrooms=bedroomCount();
  const amount=Number(priceData?.extras?.windowWashing?.largeHomeAddon);
  return {included:bedrooms<=2,fee:Number.isFinite(amount)&&amount>=0?amount:null};
 }
@@ -114,10 +266,9 @@ function priceEstimate(){
  if(!tier)return "Choose your mattress size to see an estimate.";
  if(service.name==="Deep Clean")fabricAddition+=tier.price;else price="R"+tier.price;
  }
- if(service.name==="Deep Clean"){
- const tier=priceData.deepCleanPrices?.find(p=>p.label===el("booking-bedrooms").value);
- if(!tier)return "Choose your property size to calculate the estimate.";
- price=tier.price;
+ if(isDeep()){
+  if(!roomsComplete())return "Add at least one space to see your estimate.";
+  price="R"+roomEstimate();
  }
  const extras=selectedExtras(),windows=windowChoice();
  let addition=fabricAddition+extras.reduce((sum,item)=>sum+(item.fee??0),0);
@@ -137,15 +288,19 @@ function updateEstimate(){
  ["carpet-width","carpet-length"].forEach(id=>{el(id).required=isCarpet();el(id).disabled=!isCarpet();if(!isCarpet())el(id).setCustomValidity("");});
  el("mattress-size").required=isMattress();el("mattress-size").disabled=!isMattress();
  if(!isMattress())el("mattress-size").setCustomValidity("");
- const fabric=["Carpet Washing","Mattress Washing"].includes(el("booking-service").value);
- el("booking-size").hidden=fabric;el("booking-size").required=!fabric;
- document.querySelector('label[for="booking-size"]').hidden=fabric;
- if(fabric)el("booking-size").value=isCarpet()?"Carpet":"Mattress";
- else if(["Carpet","Mattress"].includes(el("booking-size").value))el("booking-size").value="";
+ const prompt=sizePrompts[serviceName()];
+ const sizeLabel=section.querySelector('label[for="booking-size"]');
+ el("booking-size").hidden=!prompt;
+ el("booking-size").required=!!prompt;
+ sizeLabel.hidden=!prompt;
+ sizeLabel.textContent=prompt?.[0]||"";
+ el("booking-size").placeholder=prompt?.[1]||"";
+ el("room-fields").hidden=!isDeep();
+ el("outdoor-count").hidden=!el("add-outdoor").checked;
+ el("booking-extras").hidden=!hasLinenExtras()||!extraInputs.length;
  const bedroomsRequired=needsBedrooms();
  el("booking-bedroom-field").hidden=!bedroomsRequired;
  el("booking-bedrooms").required=bedroomsRequired;
- if(!bedroomsRequired)el("booking-bedrooms").setCustomValidity("");
  const windows=windowChoice();
  el("booking-window-field").hidden=!windows;
  el("booking-window-option").hidden=!windows||windows.included||windows.fee===null;
@@ -155,10 +310,14 @@ function updateEstimate(){
  el("booking-estimate").textContent=priceEstimate();
  updateSubmit();
 }
-el("booking-service").onchange=()=>{el("booking-windows").checked=false;updateEstimate();};
-["add-carpet","add-mattress","carpet-width","carpet-length","mattress-size"].forEach(id=>el(id).addEventListener("input",updateEstimate));
-el("booking-windows").onchange=updateEstimate;
-el("booking-bedrooms").onchange=updateEstimate;
+el("booking-service").onchange=()=>{
+ el("booking-size").value="";
+ el("booking-bedrooms").value="";
+ for(const id of ["booking-windows","add-carpet","add-mattress","add-outdoor"])el(id).checked=false;
+ for(const {input} of extraInputs)input.checked=false;
+ el("service-preview").textContent=priceData?.services.find(service=>service.name===serviceName())?.summary||"";
+ updateEstimate();
+};
 const key=(y,m,d)=>y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
 const allowed=date=>/^\d{4}-\d{2}-\d{2}$/.test(date)&&date>=today&&new Date(date+"T12:00:00Z").getUTCDay()!==0&&dates.has(date);
 function render(){
@@ -182,7 +341,13 @@ Promise.all([json("content/availability.json"),json("content/site.json")]).then(
  priceData=site;
  (site.mattressPrices||[]).forEach(t=>{const o=document.createElement("option");o.value=t.label;o.textContent=t.label+" — R"+t.price;el("mattress-size").append(o);});
  renderExtras();
- (site.deepCleanPrices||[]).forEach(tier=>{const o=document.createElement("option");o.value=tier.label;o.textContent=tier.label;el("booking-bedrooms").append(o);});
+ renderRooms();
+ for(const [value,label] of [[1,"Studio / 1 bedroom"],[2,"2 bedrooms"],[3,"3 bedrooms"],[4,"4+ bedrooms"]]){
+  const option=document.createElement("option");
+  option.value=value;
+  option.textContent=label;
+  el("booking-bedrooms").append(option);
+ }
  settings=availability;dates=new Set((availability.availableDates||[]).filter(v=>typeof v==="string"));
  (site.services||[]).forEach(s=>{const o=document.createElement("option");o.value=s.name;o.textContent=s.name;el("booking-service").append(o);});
  updateEstimate();
@@ -196,18 +361,41 @@ Promise.all([json("content/availability.json"),json("content/site.json")]).then(
 el("booking-form").onsubmit=async event=>{
  event.preventDefault();
  if(!selected){el("booking-feedback").textContent="Please choose an available date first.";return;}
- if(!updateSubmit()||!el("booking-form").reportValidity()){
+ if(!updateSubmit()){
  el("booking-feedback").textContent="Please complete all required fields before sending your request.";
  return;
  }
- const button=el("booking-submit");submitting=true;button.disabled=true;
+ const requestedDate=selected;
+ const rooms=isDeep()?activeRooms().map(({room,input})=>room.label+": "+input.value).join(", "):"";
+ const message=[
+  "Hi Northbound! I’d like to request a clean.",
+  "Name: "+el("booking-name").value.trim(),
+  "Service: "+serviceName(),
+  "Preferred date: "+requestedDate,
+  "Preferred start: "+el("booking-time").value,
+  "Suburb: "+el("booking-area").value.trim(),
+  rooms&&"Deep Clean spaces: "+rooms,
+  isDeep()&&"Outdoor sweep and furniture wipe-down: "+(el("add-outdoor").checked?"Yes":"No"),
+  sizePrompts[serviceName()]&&"Scope: "+el("booking-size").value.trim(),
+  needsBedrooms()&&"Bedrooms for linen change: "+el("booking-bedrooms").selectedOptions[0].textContent,
+  fabricSummary(),
+  windowSummary(),
+  ...selectedExtras().map(item=>item.name+": "+(item.fee===null?"quote requested":"+"+money(item.fee))),
+  "Website estimate: "+priceEstimate(),
+  el("booking-notes").value.trim()&&"Notes: "+el("booking-notes").value.trim(),
+  "Please confirm the team, timing and final quote. I understand work must finish by 20:00."
+ ].filter(Boolean).join("\n");
+ submitting=true;
+ updateSubmit();
+ el("booking-feedback").textContent="Checking availability…";
  try{
- const latest=await json("content/availability.json");dates=new Set(latest.availableDates||[]);
- if(!latest.enabled||!allowed(selected))throw Error("That date is no longer open. Please choose another date.");
- const number=String(latest.whatsapp||"").replace(/\D/g,"");if(!/^\d{9,15}$/.test(number))throw Error("Please contact us using the WhatsApp link below.");
- const text=["Hi Northbound! I’d like to request a clean.","Name: "+el("booking-name").value.trim(),"Service: "+el("booking-service").value,"Preferred date: "+selected,"Preferred start: "+el("booking-time").value,"Suburb: "+el("booking-area").value.trim(),"Property / item size: "+el("booking-size").value.trim(),...(fabricSummary()?[fabricSummary()]:[]),...(needsBedrooms()?["Property size category: "+el("booking-bedrooms").value]:[]),...(windowSummary()?[windowSummary()]:[]),...selectedExtras().map(item=>item.name+": "+(item.fee===null?"quote requested":"+R"+item.fee)),"Website estimate (selected priced extras included): "+priceEstimate(),"Please send me an official quote for confirmation.","Notes: "+el("booking-notes").value.trim(),"I understand the team, timing and final price need confirmation, and work must finish by 20:00."].join("\n");
- window.location.assign("https://wa.me/"+number+"?text="+encodeURIComponent(text));
- el("booking-feedback").textContent="Send the message in WhatsApp to complete your request. Your clean is not confirmed yet.";
+  settings=await json("content/availability.json");
+  dates=new Set(settings.availableDates||[]);
+  if(!settings.enabled||!allowed(requestedDate))throw Error("That date is no longer open. Please choose another date.");
+  const number=String(settings.whatsapp||"").replace(/\D/g,"");
+  if(!/^\d{9,15}$/.test(number))throw Error("Please contact us using the WhatsApp link below.");
+  el("booking-feedback").textContent="Tap Send in WhatsApp to request your clean.";
+ window.location.assign("https://wa.me/"+number+"?text="+encodeURIComponent(message));
  }catch(error){el("booking-feedback").textContent=error.message;render();}
  finally{submitting=false;updateSubmit();}
 };

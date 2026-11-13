@@ -12,7 +12,7 @@
       return response.json();
     })
     .then((data) => {
-      const { business, hero, services, deepCleanPrices, extras, propertyServices, about, faqs } = data;
+      const { business, hero, services, deepCleanRooms, extras, propertyServices, about, faqs } = data;
 
       document.querySelector(".hero .eyebrow").textContent = hero.eyebrow;
       document.querySelector(".hero h1").textContent = hero.heading;
@@ -37,14 +37,14 @@
       carePrices.innerHTML=`<div class="wrap"><div class="eyebrow">A little extra care</div><h2>Fresh fabrics. Clear prices.</h2><div class="grid"><div class="card"><h3>Carpet washing</h3><p>From R250 · Price quoted by size</p>${data.carpetPrices.map(t=>`<div class="row"><span>${t.width} m × ${t.length} m</span><strong>R${t.price.toLocaleString("en-ZA")}</strong></div>`).join("")}</div><div class="card"><h3>Mattress washing</h3>${data.mattressPrices.map(t=>`<div class="row"><span>${escapeHTML(t.label)}</span><strong>R${t.price}</strong></div>`).join("")}</div></div><p>Carpet estimates use your width × length in metres, rounded up to the next listed area bracket. Above 12.25 m², request a personalised quote. Prices are per item. Final pricing depends on size, material and condition and is confirmed after reviewing your requirements and photos.</p></div>`;
       document.querySelector("#services").after(carePrices);
 
-      document.querySelector("#pricing .price-list").innerHTML = deepCleanPrices.map((item) => `
-        <div class="row"><span>${escapeHTML(item.label)}</span><strong>${escapeHTML(item.price)}</strong></div>`).join("");
+      document.querySelector("#pricing .price-list").innerHTML = deepCleanRooms.map((item) => `
+        <div class="row"><span>${escapeHTML(item.label)}</span><strong>R${escapeHTML(item.price)} each</strong></div>`).join("");
       const extrasCard = document.querySelector("#pricing .card");
       extrasCard.innerHTML = `<h3>${escapeHTML(extras.heading || "Add a little extra care")}</h3><p><strong>Window washing</strong><br>R200 · Standard, safely reachable windows. Included in studio–2-bedroom Deep Cleans; optional +R200 for larger Deep Cleans.</p>
         <p><strong>${escapeHTML(extras.linenChangeHeading || "Linen change")}</strong><br>${escapeHTML(extras.linenChange)}</p>
         ${extras.linenIroning ? `<p><strong>${escapeHTML(extras.linenIroningHeading || "Linen ironing")}</strong><br>${escapeHTML(extras.linenIroning)}</p>` : ""}
         <p><strong>${escapeHTML(extras.linenLaundryHeading || "Laundry drop-off")}</strong><br>${escapeHTML(extras.linenLaundry)}</p>
-        <p class="small" style="color:#d7dbea">${escapeHTML(extras.note)}</p>`;
+        <p class="small">${escapeHTML(extras.note)}</p>`;
 
       document.querySelector("#properties .grid").innerHTML = propertyServices.map((service) => `
         <div class="card"><h3>${escapeHTML(service.name)}</h3><p>${escapeHTML(service.description)}</p>
